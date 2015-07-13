@@ -1,0 +1,13 @@
+{
+  "name": "chat",
+  "main": "index.js",
+  "version": "0.0.0",
+  "authors": [
+    "yuanzhengyu <creazyprogramape@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "iron-elements": "PolymerElements/iron-elements#~1.0.2",
+    "paper-header-panel": "PolymerElements/paper-header-panel#^1.0.0"
+  }
+}
