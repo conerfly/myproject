@@ -15,7 +15,7 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <title>Socket.IO chat</title>
+    <title>Web chat</title>
     <style>
     	body {
     	  height:778px;
@@ -172,14 +172,14 @@
 		var $header=$('#header');
 		var typeStatus = false;
 		var timeout;
-		document.getElementById('nickname').addEventListener('keypress',function(e){      //this part is when the page loaded, it will ask user for permission 
-			var key = e.which;															  //after the user type the username
+		document.getElementById('nickname').addEventListener('keypress',function(e){      			//this part is when the page loaded, it will ask user for permission
+			var key = e.which;															  			//after the user type the username
 			if(! ('Notification' in window) ){
 				alert('Web Notification is not supported');
 				return;
 			}else{
-				if(key == 13){											//here will check if user press enter(means that user will choice default name)
-					Notification.requestPermission();					// then ask the user for permission.
+				if(key == 13){															//here will check if user press enter(means that user will choice default name)
+					Notification.requestPermission();									// then ask the user for permission.
 				}
 	
 			}	
@@ -215,8 +215,8 @@
 			select.innerHTML = html;
 		});
 		function timeoutFunction(){											//these two parts is "show typing function",
-			typeStatus = false;												//after 3 seconds, if the user do not press a key, the show typing message
-			var checkslt2 = document.getElementById('selectUser');			// will disappear 	
+			typeStatus = false;												//after 3 seconds, if the user do not press a key, the show typing message will disappear
+			var checkslt2 = document.getElementById('selectUser');
 			socket.emit('checktyping', {value: checkslt2.options[checkslt2.selectedIndex].value, type: false});
 		};
 		
@@ -259,22 +259,22 @@
 			}
 		});
 
-		socket.on('new message', function(data){								//this part will append the public message
+		socket.on('new message', function(data){													//this part will append the public message
 			$chat.append('<span class="msg"><b style="font-size: 25px;">' + data.nick + ': </b>' + data.msg + "</span><br/>");
 		});
 
-		socket.on('whisper', function(data){									//this part is for display the private message
+		socket.on('whisper', function(data){														//this part is for display the private message
 			$('#note').hide();
 			$chat.append('<span class="whisper"><b>' + data.nick + ': </b>' + data.msg + ' (to '+data.touser+' )'+'</span><br/>');
 		});
 		
 			    
-		socket.on('usercome', function(data) {							//when a new user is online, all the current users will receive a notification
+		socket.on('usercome', function(data) {														//when a new user is online, all the current users will receive a notification
 			if (Notification.permission === "granted") {
 				var come = new Notification(data.user+" is online now");
 			}
         });
-		socket.on('userleave', function(data) {							//when a user is offline, all the current users will receive a notification
+		socket.on('userleave', function(data) {														//when a user is offline, all the current users will receive a notification
 			if (Notification.permission === "granted") {
 				var leave = new Notification(data.user+" is leaving");
 			}

@@ -15,8 +15,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-    'object.js',
-    'spec/object.test.js'
+    'temp.js',
+    'spec/test.js',
+    'node_modules/express/index.js',
+    'node_modules/requirejs/require.js'
     ],
 
 
